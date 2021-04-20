@@ -31,7 +31,7 @@ client.connect(err => {
     const email = req.body.email;
     adminCollection.find({email: email} )
         .toArray((err, isAdmin) => {
-          console.log(email)
+          // console.log(email)
             res.send(isAdmin.length > 0);
         })
 })
@@ -41,7 +41,7 @@ app.delete('/delete/:id',(req ,res) =>{
   const id = ObjectID(req.params.id)
   serviceCollection.findOneAndDelete({_id:id})
   .then(result =>{
-    console.log( result )
+    // console.log( result )
     res.send(result.value)
     
   })
@@ -56,7 +56,7 @@ app.delete('/delete/:id',(req ,res) =>{
     const newAdmin = req.body;
 
     adminCollection .insertOne(newAdmin).then((result) => {
-      console.log('inserted one admin',result.insertedCount)
+      // console.log('inserted one admin',result.insertedCount)
       res.send(result.insertedCount > 0);
     });
   });
@@ -86,7 +86,7 @@ app.delete('/delete/:id',(req ,res) =>{
     const newReview = req.body;
 
     reviewCollection.insertOne(newReview).then((result) => {
-      console.log('inserted one review',result.insertedCount)
+      // console.log('inserted one review',result.insertedCount)
       res.send(result.insertedCount > 0);
     });
   });
@@ -117,7 +117,7 @@ app.delete('/delete/:id',(req ,res) =>{
     const newBooking = req.body;
 
     bookingCollection.insertOne(newBooking).then((result) => {
-      console.log('inserted one booking',result.insertedCount)
+      // console.log('inserted one booking',result.insertedCount)
       res.send(result.insertedCount > 0);
     });
   });
@@ -135,7 +135,7 @@ app.delete('/delete/:id',(req ,res) =>{
     const newService = req.body;
 
     serviceCollection.insertOne(newService).then((result) => {
-      console.log('inserted one service',result.insertedCount)
+      // console.log('inserted one service',result.insertedCount)
       res.send(result.insertedCount > 0);
     });
   });
