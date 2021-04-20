@@ -140,7 +140,6 @@ app.delete('/delete/:id',(req ,res) =>{
     });
   });
 
-  // perform actions on the collection object
   // client.close();
 });
 
