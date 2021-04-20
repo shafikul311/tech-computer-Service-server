@@ -23,7 +23,28 @@ client.connect(err => {
   const serviceCollection = client.db('service-provider').collection("service-collection");
   const reviewCollection = client.db('service-provider').collection("review-collection");
   const bookingCollection = client.db('service-provider').collection("booking-collection");
+  const adminCollection = client.db('service-provider').collection("admin-collection");
   // console.log('working')
+
+
+
+  // get data for admin collection
+  app.get("/addAdmin", (req, res) => {
+    adminCollection .find().toArray((err, email) => {
+      res.send(email);
+    });
+  });
+
+
+// add data for admin collection
+  app.post("/addAdmin", (req, res) => {
+    const newAdmin = req.body;
+
+    adminCollection .insertOne(newAdmin).then((result) => {
+      console.log('inserted one admin',result.insertedCount)
+      res.send(result.insertedCount > 0);
+    });
+  });
 
 
   // Get Service from Database using id
@@ -37,13 +58,15 @@ client.connect(err => {
 
 
 
-// add Data review collection
+// get ui Data review collection
   app.get("/addReview", (req, res) => {
     reviewCollection.find().toArray((err, items) => {
       res.send(items);
     });
   });
 
+  
+// add Data review collection
   app.post("/addReview", (req, res) => {
     const newReview = req.body;
 
@@ -53,15 +76,12 @@ client.connect(err => {
     });
   });
 
-
-
- // get data for all booking
-  app.get("/addBooking", (req, res) => {
-    bookingCollection.find().toArray((err, document) => {
-      res.send(document);
-    });
-  });
-
+      // get data for all booking
+      app.get("/addBooking", (req, res) => {
+        bookingCollection.find().toArray((err, document) => {
+          res.send(document);
+        });
+      });
 
 
         // get data from booking collection
@@ -72,6 +92,9 @@ client.connect(err => {
           res.send(document);
         });
     });
+
+
+ 
 
 
   // booking collection
