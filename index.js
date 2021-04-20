@@ -27,13 +27,28 @@ client.connect(err => {
   // console.log('working')
 
 
+  app.post('/isAdmin', (req, res) => {
+    const email = req.body.email;
+    adminCollection.find({email: email} )
+        .toArray((err, isAdmin) => {
+          console.log(email)
+            res.send(isAdmin.length > 0);
+        })
+})
 
-  // get data for admin collection
-  app.get("/addAdmin", (req, res) => {
-    adminCollection .find().toArray((err, email) => {
-      res.send(email);
-    });
-  });
+
+app.delete('/delete/:id',(req ,res) =>{
+  const id = ObjectID(req.params.id)
+  serviceCollection.findOneAndDelete({_id:id})
+  .then(result =>{
+    console.log( result )
+    res.send(result.value)
+    
+  })
+
+})
+
+
 
 
 // add data for admin collection
@@ -59,7 +74,7 @@ client.connect(err => {
 
 
 // get ui Data review collection
-  app.get("/addReview", (req, res) => {
+  app.get("/getReview", (req, res) => {
     reviewCollection.find().toArray((err, items) => {
       res.send(items);
     });
@@ -77,7 +92,7 @@ client.connect(err => {
   });
 
       // get data for all booking
-      app.get("/addBooking", (req, res) => {
+      app.get("/getBooking", (req, res) => {
         bookingCollection.find().toArray((err, document) => {
           res.send(document);
         });
@@ -110,7 +125,7 @@ client.connect(err => {
 
 
 // add Data Service collection
-  app.get("/addService", (req, res) => {
+  app.get("/getService", (req, res) => {
     serviceCollection.find().toArray((err, items) => {
       res.send(items);
     });
