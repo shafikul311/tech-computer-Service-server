@@ -135,7 +135,6 @@ app.delete('/delete/:id',(req ,res) =>{
     const newService = req.body;
 
     serviceCollection.insertOne(newService).then((result) => {
-      // console.log('inserted one service',result.insertedCount)
       res.send(result.insertedCount > 0);
     });
   });
